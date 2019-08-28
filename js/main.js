@@ -10,6 +10,7 @@ let score = 0;
 let time = 30;
 let number = 1;
 let idInterval;
+let idTimeout;
 let flag = false;
 
 const addPoints = () => {
@@ -53,17 +54,21 @@ const timer = () => {
 
 const startGame = () => {
     flag = true;
+    clearTimeout(idTimeout);
+    clearInterval(idInterval);
+    number = 1;
     idInterval = setInterval(timer, 1000);
     score = 0;
     points.textContent = score;
     time = 30;
     timerSpan.textContent = `${time} sec`
     result.textContent = "---";
-    setTimeout(resultsLoser, 30000);
+    idTimeout = setTimeout(resultsLoser, 30000);
 };
 
 const gameReset = () => {
     flag = false;
+    clearTimeout(idTimeout);
     clearInterval(idInterval);
     score = 0;
     points.textContent = score;
